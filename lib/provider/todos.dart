@@ -57,4 +57,22 @@ class TodosProvider extends ChangeNotifier {
     saveTodo(todo);
   }
 
+  void removeTodo(Todo todo) {
+    _todos.remove(todo);
+  }
+
+  void updateTodo(Todo todo, title, description) {
+    int indexTodo = _todos.indexWhere((element) => element.id == todo.id);
+
+    final todoupdate = Todo(
+      title: title,
+      createdTime: _todos[indexTodo].createdTime,
+      id: _todos[indexTodo].id,
+      isDone: _todos[indexTodo].isDone,
+      description: description,
+    );
+
+    _todos.removeAt(indexTodo);
+    saveTodo(todoupdate);
+  }
 }

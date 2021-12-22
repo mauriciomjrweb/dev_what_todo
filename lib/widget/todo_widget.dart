@@ -1,4 +1,5 @@
 import 'package:dev_what_todo/models/todo.dart';
+import 'package:dev_what_todo/page/edit_todo_page.dart';
 import 'package:dev_what_todo/provider/todos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -7,7 +8,7 @@ import 'package:provider/provider.dart';
 class TodoWidget extends StatefulWidget {
   final Todo todo;
 
-   const TodoWidget({required this.todo, Key? key}) : super(key: key);
+  const TodoWidget({required this.todo, Key? key}) : super(key: key);
 
   @override
   State<TodoWidget> createState() => _TodoWidgetState();
@@ -24,7 +25,7 @@ class _TodoWidgetState extends State<TodoWidget> {
         actions: [
           IconSlideAction(
             color: Colors.green,
-            onTap: () {},
+            onTap: ()=>editTodo(context, todo),
             caption: 'Edit',
             icon: Icons.edit,
           )
@@ -90,6 +91,21 @@ class _TodoWidgetState extends State<TodoWidget> {
             ],
           )),
         ],
+      ),
+    );
+  }
+
+  void deleteTodo(BuildContext context, Todo todo) {
+    final provider = Provider.of<TodosProvider>(context, listen: false);
+    provider.removeTodo(todo);
+    //Todo: Criar classe Utils
+    //Utils.showSnackBar(context, 'Deleted the Task');
+  }
+
+  void editTodo(BuildContext context, Todo todo) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditTodoPage(todo: todo),
       ),
     );
   }
