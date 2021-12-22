@@ -3,6 +3,10 @@ import 'package:dev_what_todo/widget/add_todo_dialog_widget.dart';
 import 'package:dev_what_todo/widget/todo_list_widget.dart';
 import 'package:flutter/material.dart';
 
+// fixme:
+// Alterar Tarefa
+// Excluir Tarefa
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();

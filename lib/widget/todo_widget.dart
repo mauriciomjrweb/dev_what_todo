@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class TodoWidget extends StatefulWidget {
   final Todo todo;
 
-  const TodoWidget({required this.todo, Key? key}) : super(key: key);
+   const TodoWidget({required this.todo, Key? key}) : super(key: key);
 
   @override
   State<TodoWidget> createState() => _TodoWidgetState();
@@ -57,7 +57,7 @@ class _TodoWidgetState extends State<TodoWidget> {
             value: widget.todo.isDone,
             onChanged: (value) {
               setState(() {
-                provider.updateTodo(widget.todo.id, widget.todo);
+                provider.updateTodoIsDone(widget.todo.id, value!);
               });
             },
           ),

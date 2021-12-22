@@ -2,7 +2,8 @@ import 'package:dev_what_todo/models/todo.dart';
 import 'package:flutter/material.dart';
 
 class TodosProvider extends ChangeNotifier {
-  final List<Todo> _todos = [
+  // ignore: prefer_final_fields
+  late List<Todo> _todos = [
     Todo(
       title: 'Buy Food',
       createdTime: DateTime.now(),
@@ -43,8 +44,17 @@ class TodosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTodo(String todoId, Todo todo) {
+  void updateTodoIsDone(String todoId, bool isDone) {
     int indexTodo = _todos.indexWhere((element) => element.id == todoId);
-    _todos[indexTodo] = todo;
+    final Todo todo = Todo(
+      title: _todos[indexTodo].title,
+      createdTime: _todos[indexTodo].createdTime,
+      id: _todos[indexTodo].id,
+      isDone: isDone,
+      description: _todos[indexTodo].description,
+    );
+    _todos.removeAt(indexTodo);
+    saveTodo(todo);
   }
+
 }
