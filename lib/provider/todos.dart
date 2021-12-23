@@ -44,13 +44,13 @@ class TodosProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTodoIsDone(String todoId, bool isDone) {
+  void updateTodoIsDone(String todoId) {
     int indexTodo = _todos.indexWhere((element) => element.id == todoId);
     final Todo todo = Todo(
       title: _todos[indexTodo].title,
       createdTime: _todos[indexTodo].createdTime,
       id: _todos[indexTodo].id,
-      isDone: isDone,
+      isDone: !_todos[indexTodo].isDone,
       description: _todos[indexTodo].description,
     );
     _todos.removeAt(indexTodo);
@@ -59,6 +59,7 @@ class TodosProvider extends ChangeNotifier {
 
   void removeTodo(Todo todo) {
     _todos.remove(todo);
+    notifyListeners();
   }
 
   void updateTodo(Todo todo, title, description) {
